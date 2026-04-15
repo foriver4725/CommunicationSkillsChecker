@@ -1,62 +1,10 @@
-const DIAGNOSIS_DATA = {
-  title: "コミュニケーションの苦手ポイント診断",
-  likertScale: [
-    { value: 1, label: "全く当てはまらない" },
-    { value: 2, label: "あまり当てはまらない" },
-    { value: 3, label: "どちらともいえない" },
-    { value: 4, label: "やや当てはまる" },
-    { value: 5, label: "とても当てはまる" },
-  ],
-  axes: [
-    { id: "context", label: "社会コンテキスト", description: "相手・場・空気の読み取り" },
-    { id: "emotion", label: "感情", description: "緊張や不安の影響" },
-    { id: "topic", label: "話題生成", description: "何を話すか思いつく力" },
-    { id: "response", label: "応答", description: "相手の話への返し" },
-    { id: "structure", label: "構成", description: "順序立てて話す力" },
-    { id: "expression", label: "表現", description: "言葉に変換して伝える力" },
-    { id: "timing", label: "タイミング", description: "話し始める・入る感覚" },
-    { id: "experience", label: "経験", description: "慣れ・成功体験・自己効力感" },
-  ],
-  questions: [
-    { id: "q01", text: "相手や場の雰囲気を見て、どう振る舞うべきか判断できる。", axisWeights: { context: 1 }, reverse: true },
-    { id: "q02", text: "相手が雑談をしたいのか、結論を求めているのかを感じ取れる。", axisWeights: { context: 1 }, reverse: true },
-    { id: "q03", text: "会話が始まる前から、強い緊張や不安を感じることが多い。", axisWeights: { emotion: 1 } },
-    { id: "q04", text: "初対面や目上の相手だと、頭が真っ白になりやすい。", axisWeights: { emotion: 0.7, context: 0.3 } },
-    { id: "q05", text: "会話の中で、何を話題にすればよいか思いつかないことが多い。", axisWeights: { topic: 1 } },
-    { id: "q06", text: "会話を広げるためのネタを自然に思いつける。", axisWeights: { topic: 1 }, reverse: true },
-    { id: "q07", text: "相手の話に対して、何を返せばいいか迷うことが多い。", axisWeights: { response: 1 } },
-    { id: "q08", text: "相手の発言に対して、自然に質問や返答を思いつける。", axisWeights: { response: 1 }, reverse: true },
-    { id: "q09", text: "頭の中では考えているのに、うまく言葉にできない。", axisWeights: { expression: 1 } },
-    { id: "q10", text: "言いたいことはあるが、適切な表現が見つからず止まってしまう。", axisWeights: { expression: 1 } },
-    { id: "q11", text: "伝えたい内容を順序立てて話せる。", axisWeights: { structure: 1 }, reverse: true },
-    { id: "q12", text: "話している途中で、自分が何を言いたいのか分からなくなることがある。", axisWeights: { structure: 1 } },
-    { id: "q13", text: "会話に入るタイミングがつかめず、発言を見送ることが多い。", axisWeights: { timing: 0.7, context: 0.3 } },
-    { id: "q14", text: "話し始めるべき場面で、ためらってしまうことが多い。", axisWeights: { timing: 0.6, emotion: 0.4 } },
-    { id: "q15", text: "緊張すると、声が出にくくなったり言葉が詰まったりする。", axisWeights: { emotion: 0.8, expression: 0.2 } },
-    { id: "q16", text: "会話中にミスを恐れて、言いたいことがあっても控えてしまう。", axisWeights: { emotion: 0.7, timing: 0.3 } },
-    { id: "q17", text: "人と話す機会が少なく、慣れていないと感じる。", axisWeights: { experience: 1 } },
-    { id: "q18", text: "会話で『うまく話せた』と感じる経験があまりない。", axisWeights: { experience: 1 } },
-    { id: "q19", text: "会話を重ねることで、少しずつ上達している実感がある。", axisWeights: { experience: 1 }, reverse: true },
-    { id: "q20", text: "人と話すことに、ある程度慣れている。", axisWeights: { experience: 1 }, reverse: true },
-    { id: "q21", text: "相手に合わせて、話し方や言葉選びを調整できる。", axisWeights: { context: 0.5, expression: 0.5 }, reverse: true },
-    { id: "q22", text: "会話の途中で、相手が退屈していそうかどうかを察知できる。", axisWeights: { context: 1 }, reverse: true },
-    { id: "q23", text: "沈黙が続くと、焦りが強くなる。", axisWeights: { emotion: 0.5, timing: 0.5 } },
-    { id: "q24", text: "相手の話の意図をつかみ損ねて、返答に困ることがある。", axisWeights: { response: 0.6, context: 0.4 } },
-    { id: "q25", text: "聞いた内容を踏まえて、自分の意見や感想を返すのが得意だ。", axisWeights: { response: 1 }, reverse: true },
-    { id: "q26", text: "長く話そうとすると、話の筋道が崩れやすい。", axisWeights: { structure: 1 } },
-    { id: "q27", text: "短くても、要点を押さえて伝えられる。", axisWeights: { structure: 0.5, expression: 0.5 }, reverse: true },
-    { id: "q28", text: "思いついたことを、その場で言葉にするのが苦手だ。", axisWeights: { expression: 0.7, timing: 0.3 } },
-    { id: "q29", text: "複数人の会話では、発言のタイミングがさらに難しく感じる。", axisWeights: { timing: 0.6, context: 0.4 } },
-    { id: "q30", text: "多少うまくいかなくても、次の会話でまた試してみようと思える。", axisWeights: { experience: 0.7, emotion: 0.3 }, reverse: true },
-    { id: "q31", text: "相手の話を聞きながら、返答を考えるのが難しい。", axisWeights: { response: 0.6, topic: 0.4 } },
-    { id: "q32", text: "雑談では特に、何を言えばよいか分からなくなる。", axisWeights: { topic: 0.8, context: 0.2 } },
-  ],
-};
+const DATA_URL = "./diagnosis-data.json";
 
 const state = {
+  data: null,
   shuffledQuestions: [],
   answers: {},
-  currentIndex: 0,
+  currentPageIndex: 0,
 };
 
 const screens = {
@@ -65,13 +13,14 @@ const screens = {
   result: document.getElementById("screen-result"),
 };
 
+const appTitle = document.getElementById("app-title");
+const appDescription = document.getElementById("app-description");
+const introSteps = document.getElementById("intro-steps");
 const axisPreview = document.getElementById("axis-preview");
 const startButton = document.getElementById("start-button");
 const progressText = document.getElementById("progress-text");
 const progressBarFill = document.getElementById("progress-bar-fill");
-const questionAxisTags = document.getElementById("question-axis-tags");
-const questionText = document.getElementById("question-text");
-const likertOptions = document.getElementById("likert-options");
+const questionList = document.getElementById("question-list");
 const prevButton = document.getElementById("prev-button");
 const nextButton = document.getElementById("next-button");
 const backToTopButton = document.getElementById("back-to-top-button");
@@ -79,34 +28,90 @@ const retryButton = document.getElementById("retry-button");
 const scoreList = document.getElementById("score-list");
 const radarChart = document.getElementById("radar-chart");
 
-function init() {
-  renderAxisPreview();
-  bindEvents();
+async function init() {
+  try {
+    const data = await loadDiagnosisData();
+    validateDiagnosisData(data);
+    state.data = data;
+    renderIntro();
+    bindEvents();
+  } catch (error) {
+    console.error(error);
+    appDescription.textContent = "データの読み込みに失敗しました。diagnosis-data.json の形式を確認してください。";
+    startButton.disabled = true;
+  }
 }
 
-function renderAxisPreview() {
-  axisPreview.innerHTML = "";
-  DIAGNOSIS_DATA.axes.forEach((axis) => {
+async function loadDiagnosisData() {
+  const response = await fetch(DATA_URL, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error(`データの読み込みに失敗しました: ${response.status}`);
+  }
+  return response.json();
+}
+
+function validateDiagnosisData(data) {
+  if (!data || !Array.isArray(data.axes) || !Array.isArray(data.questions) || !Array.isArray(data.likertScale)) {
+    throw new Error("diagnosis-data.json の基本構造が不正です。");
+  }
+
+  if (data.likertScale.length !== 4) {
+    throw new Error("likertScale は 4 項目で定義してください。");
+  }
+
+  const axisIds = new Set(data.axes.map((axis) => axis.id));
+  data.questions.forEach((question) => {
+    if (!question.id || !question.text || !question.axisWeights) {
+      throw new Error(`質問データが不正です: ${JSON.stringify(question)}`);
+    }
+    Object.keys(question.axisWeights).forEach((axisId) => {
+      if (!axisIds.has(axisId)) {
+        throw new Error(`未定義の軸が使われています: ${axisId}`);
+      }
+    });
+  });
+}
+
+function renderIntro() {
+  const { data } = state;
+  document.title = data.title ?? "コミュニケーション診断";
+  appTitle.textContent = data.title ?? "コミュニケーション診断";
+  appDescription.innerHTML = (data.description ?? "質問に答えることで、コミュニケーションの苦手ポイントを可視化します。").replaceAll("\n", "<br />");
+
+  introSteps.innerHTML = "";
+  const steps = [
+    `${data.pageSize ?? 5}問ずつ表示されます`,
+    "前へ / 次へ で移動できます",
+    "最後に提出すると結果が確定します",
+  ];
+  steps.forEach((text) => {
     const li = document.createElement("li");
-    li.textContent = `${axis.label}：${axis.description}`;
+    li.textContent = text;
+    introSteps.appendChild(li);
+  });
+
+  axisPreview.innerHTML = "";
+  data.axes.forEach((axis) => {
+    const li = document.createElement("li");
+    li.textContent = `${axis.label}：${axis.description ?? ""}`;
     axisPreview.appendChild(li);
   });
 }
 
 function bindEvents() {
   startButton.addEventListener("click", startDiagnosis);
-  prevButton.addEventListener("click", handlePrev);
-  nextButton.addEventListener("click", handleNext);
+  prevButton.addEventListener("click", handlePrevPage);
+  nextButton.addEventListener("click", handleNextPage);
   retryButton.addEventListener("click", resetDiagnosis);
   backToTopButton.addEventListener("click", () => showScreen("intro"));
 }
 
 function startDiagnosis() {
-  state.currentIndex = 0;
+  state.currentPageIndex = 0;
   state.answers = {};
-  state.shuffledQuestions = shuffle([...DIAGNOSIS_DATA.questions]);
+  state.shuffledQuestions = shuffle([...state.data.questions]);
   showScreen("questionnaire");
-  renderQuestion();
+  renderQuestionPage();
 }
 
 function resetDiagnosis() {
@@ -119,47 +124,98 @@ function showScreen(screenKey) {
   });
 }
 
-function handlePrev() {
-  saveCurrentAnswer();
-  if (state.currentIndex > 0) {
-    state.currentIndex -= 1;
-    renderQuestion();
+function getPageSize() {
+  return Number(state.data.pageSize) > 0 ? Number(state.data.pageSize) : 5;
+}
+
+function getTotalPages() {
+  return Math.ceil(state.shuffledQuestions.length / getPageSize());
+}
+
+function getQuestionsForCurrentPage() {
+  const pageSize = getPageSize();
+  const start = state.currentPageIndex * pageSize;
+  return state.shuffledQuestions.slice(start, start + pageSize);
+}
+
+function handlePrevPage() {
+  saveCurrentPageAnswers();
+  if (state.currentPageIndex > 0) {
+    state.currentPageIndex -= 1;
+    renderQuestionPage();
   }
 }
 
-function handleNext() {
-  const selectedValue = getSelectedLikertValue();
-  if (selectedValue === null) {
-    window.alert("回答を選択してください。");
+function handleNextPage() {
+  const currentPageQuestions = getQuestionsForCurrentPage();
+  const unansweredQuestion = currentPageQuestions.find((question) => getSelectedLikertValue(question.id) === null);
+
+  if (unansweredQuestion) {
+    window.alert("このページの質問にすべて回答してください。");
     return;
   }
 
-  saveCurrentAnswer();
+  saveCurrentPageAnswers();
 
-  if (state.currentIndex === state.shuffledQuestions.length - 1) {
+  if (state.currentPageIndex === getTotalPages() - 1) {
     showResults();
     return;
   }
 
-  state.currentIndex += 1;
-  renderQuestion();
+  state.currentPageIndex += 1;
+  renderQuestionPage();
 }
 
-function renderQuestion() {
-  const question = state.shuffledQuestions[state.currentIndex];
-  const currentAnswer = state.answers[question.id] ?? null;
-  const progress = ((state.currentIndex + 1) / state.shuffledQuestions.length) * 100;
+function renderQuestionPage() {
+  const questions = getQuestionsForCurrentPage();
+  const totalPages = getTotalPages();
+  const progress = ((state.currentPageIndex + 1) / totalPages) * 100;
+  const pageStartQuestionNumber = state.currentPageIndex * getPageSize() + 1;
+  const pageEndQuestionNumber = pageStartQuestionNumber + questions.length - 1;
 
-  progressText.textContent = `質問 ${state.currentIndex + 1} / ${state.shuffledQuestions.length}`;
+  progressText.textContent = `ページ ${state.currentPageIndex + 1} / ${totalPages}（質問 ${pageStartQuestionNumber}〜${pageEndQuestionNumber}）`;
   progressBarFill.style.width = `${progress}%`;
 
-  questionText.textContent = question.text;
-  questionAxisTags.textContent = axisNamesFromWeights(question.axisWeights).join(" / ");
+  questionList.innerHTML = "";
+  questions.forEach((question, index) => {
+    const questionNumber = pageStartQuestionNumber + index;
+    questionList.appendChild(createQuestionCard(question, questionNumber));
+  });
 
-  likertOptions.innerHTML = "";
-  DIAGNOSIS_DATA.likertScale.forEach((option) => {
-    const wrapper = document.createElement("div");
-    wrapper.className = "likert-option";
+  prevButton.disabled = state.currentPageIndex === 0;
+  nextButton.textContent = state.currentPageIndex === totalPages - 1 ? "提出する" : "次へ";
+}
+
+function createQuestionCard(question, questionNumber) {
+  const currentAnswer = state.answers[question.id] ?? null;
+  const wrapper = document.createElement("article");
+  wrapper.className = "question-item";
+
+  const tags = axisNamesFromWeights(question.axisWeights).join(" / ");
+  const visualHtml = question.imageUrl
+    ? `<img class="question-image" src="${escapeHtml(question.imageUrl)}" alt="質問のイメージ画像" loading="lazy" />`
+    : `<div class="question-image-placeholder">画像URLを設定すると、ここに表示されます。</div>`;
+
+  wrapper.innerHTML = `
+    <div class="question-item-inner">
+      <div class="question-visual">${visualHtml}</div>
+      <div class="question-body">
+        <p class="question-number">質問 ${questionNumber}</p>
+        <p class="axis-tags">${escapeHtml(tags)}</p>
+        <h2 class="question-text">${escapeHtml(question.text)}</h2>
+        <p class="question-help">もっとも近いものを選んでください。</p>
+        <fieldset class="likert-fieldset">
+          <legend class="sr-only">回答を選択</legend>
+          <div class="likert-options"></div>
+        </fieldset>
+      </div>
+    </div>
+  `;
+
+  const optionsContainer = wrapper.querySelector(".likert-options");
+  state.data.likertScale.forEach((option) => {
+    const optionWrapper = document.createElement("div");
+    optionWrapper.className = "likert-option";
 
     const input = document.createElement("input");
     input.type = "radio";
@@ -173,31 +229,30 @@ function renderQuestion() {
     const label = document.createElement("label");
     label.htmlFor = input.id;
     label.innerHTML = `
-      <span class="likert-value">${option.value}</span>
-      <span class="likert-label">${option.label}</span>
+      <span class="likert-value">${escapeHtml(String(option.value))}</span>
+      <span class="likert-label">${escapeHtml(option.label)}</span>
     `;
 
-    wrapper.appendChild(input);
-    wrapper.appendChild(label);
-    likertOptions.appendChild(wrapper);
+    optionWrapper.appendChild(input);
+    optionWrapper.appendChild(label);
+    optionsContainer.appendChild(optionWrapper);
   });
 
-  prevButton.disabled = state.currentIndex === 0;
-  nextButton.textContent = state.currentIndex === state.shuffledQuestions.length - 1 ? "提出する" : "次へ";
+  return wrapper;
 }
 
-function getSelectedLikertValue() {
-  const question = state.shuffledQuestions[state.currentIndex];
-  const checked = document.querySelector(`input[name="question-${question.id}"]:checked`);
+function getSelectedLikertValue(questionId) {
+  const checked = document.querySelector(`input[name="question-${questionId}"]:checked`);
   return checked ? Number(checked.value) : null;
 }
 
-function saveCurrentAnswer() {
-  const question = state.shuffledQuestions[state.currentIndex];
-  const selectedValue = getSelectedLikertValue();
-  if (selectedValue !== null) {
-    state.answers[question.id] = selectedValue;
-  }
+function saveCurrentPageAnswers() {
+  getQuestionsForCurrentPage().forEach((question) => {
+    const selectedValue = getSelectedLikertValue(question.id);
+    if (selectedValue !== null) {
+      state.answers[question.id] = selectedValue;
+    }
+  });
 }
 
 function showResults() {
@@ -208,8 +263,11 @@ function showResults() {
 }
 
 function calculateScores() {
-  const totals = Object.fromEntries(DIAGNOSIS_DATA.axes.map((axis) => [axis.id, 0]));
-  const weights = Object.fromEntries(DIAGNOSIS_DATA.axes.map((axis) => [axis.id, 0]));
+  const totals = Object.fromEntries(state.data.axes.map((axis) => [axis.id, 0]));
+  const weights = Object.fromEntries(state.data.axes.map((axis) => [axis.id, 0]));
+  const maxScaleValue = Math.max(...state.data.likertScale.map((item) => Number(item.value)));
+  const minScaleValue = Math.min(...state.data.likertScale.map((item) => Number(item.value)));
+  const scaleRange = maxScaleValue - minScaleValue;
 
   state.shuffledQuestions.forEach((question) => {
     const rawAnswer = state.answers[question.id];
@@ -217,7 +275,7 @@ function calculateScores() {
       return;
     }
 
-    const adjustedAnswer = question.reverse ? 6 - rawAnswer : rawAnswer;
+    const adjustedAnswer = question.reverse ? maxScaleValue + minScaleValue - rawAnswer : rawAnswer;
 
     Object.entries(question.axisWeights).forEach(([axisId, weight]) => {
       totals[axisId] += adjustedAnswer * weight;
@@ -225,9 +283,9 @@ function calculateScores() {
     });
   });
 
-  return DIAGNOSIS_DATA.axes.map((axis) => {
+  return state.data.axes.map((axis) => {
     const average = weights[axis.id] > 0 ? totals[axis.id] / weights[axis.id] : 0;
-    const normalized = average > 0 ? ((average - 1) / 4) * 100 : 0;
+    const normalized = average > 0 && scaleRange > 0 ? ((average - minScaleValue) / scaleRange) * 100 : 0;
     return {
       id: axis.id,
       label: axis.label,
@@ -248,8 +306,8 @@ function renderScoreList(scores) {
     container.innerHTML = `
       <div class="score-item-header">
         <div>
-          <div class="score-item-title">${item.label}</div>
-          <div class="likert-label">${item.description}</div>
+          <div class="score-item-title">${escapeHtml(item.label)}</div>
+          <div class="likert-label">${escapeHtml(item.description ?? "")}</div>
         </div>
         <div class="score-item-value">${item.score} / 100</div>
       </div>
@@ -340,7 +398,7 @@ function drawRadarChart(scores) {
 
 function axisNamesFromWeights(axisWeights) {
   return Object.keys(axisWeights).map((axisId) => {
-    const axis = DIAGNOSIS_DATA.axes.find((item) => item.id === axisId);
+    const axis = state.data.axes.find((item) => item.id === axisId);
     return axis ? axis.label : axisId;
   });
 }
@@ -388,6 +446,15 @@ function shuffle(array) {
     [array[index], array[randomIndex]] = [array[randomIndex], array[index]];
   }
   return array;
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }
 
 init();
