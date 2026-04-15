@@ -1,0 +1,2 @@
+# CommunicationSkillsChecker
+コミュニケーション能力診断サイト
