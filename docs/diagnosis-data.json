@@ -1,6 +1,6 @@
 {
   "title": "コミュニケーションの苦手ポイント診断",
-  "description": "質問に答えることで、コミュニケーションの苦手ポイントを可視化します。\n軸や質問、画像URLは JSON を編集するだけで差し替えできます。",
+  "description": "質問に答えることで、コミュニケーションの得意・苦手の傾向を可視化します。\n軸や質問、画像URLは JSON を編集するだけで差し替えできます。",
   "pageSize": 5,
   "likertScale": [
     { "value": 1, "label": "当てはまらない" },
@@ -9,47 +9,239 @@
     { "value": 4, "label": "当てはまる" }
   ],
   "axes": [
-    { "id": "context", "label": "社会コンテキスト", "description": "相手・場・空気の読み取り" },
-    { "id": "emotion", "label": "感情", "description": "緊張や不安の影響" },
-    { "id": "topic", "label": "話題生成", "description": "何を話すか思いつく力" },
-    { "id": "response", "label": "応答", "description": "相手の話への返し" },
-    { "id": "structure", "label": "構成", "description": "順序立てて話す力" },
-    { "id": "expression", "label": "表現", "description": "言葉に変換して伝える力" },
-    { "id": "timing", "label": "タイミング", "description": "話し始める・入る感覚" },
-    { "id": "experience", "label": "経験", "description": "慣れ・成功体験・自己効力感" }
+    { "id": "timing", "label": "タイミング", "description": "話し始める・入るタイミングをつかむ力" },
+    { "id": "thinking", "label": "思考系", "description": "話題や返しを考える力" },
+    { "id": "technical", "label": "技術系", "description": "考えを言葉にして伝える力" },
+    { "id": "emotion", "label": "感情系", "description": "緊張や不安に左右されにくい状態" },
+    { "id": "experience", "label": "経験系", "description": "場数や慣れ、成功体験の蓄積" },
+    { "id": "listening", "label": "聞く力", "description": "相手の話を受け取り反応する力" },
+    { "id": "nonverbal", "label": "非言語", "description": "表情・声・雰囲気など言葉以外の伝達" },
+    { "id": "situation", "label": "シチュエーション", "description": "相手や場面に応じて切り替える力" }
   ],
   "questions": [
-    { "id": "q01", "text": "相手や場の雰囲気を見て、どう振る舞うべきか判断できる。", "imageUrl": "https://picsum.photos/seed/comm-q01/640/420", "axisWeights": { "context": 1 }, "reverse": true },
-    { "id": "q02", "text": "相手が雑談をしたいのか、結論を求めているのかを感じ取れる。", "imageUrl": "https://picsum.photos/seed/comm-q02/640/420", "axisWeights": { "context": 1 }, "reverse": true },
-    { "id": "q03", "text": "会話が始まる前から、強い緊張や不安を感じることが多い。", "imageUrl": "https://picsum.photos/seed/comm-q03/640/420", "axisWeights": { "emotion": 1 } },
-    { "id": "q04", "text": "初対面や目上の相手だと、頭が真っ白になりやすい。", "imageUrl": "https://picsum.photos/seed/comm-q04/640/420", "axisWeights": { "emotion": 0.7, "context": 0.3 } },
-    { "id": "q05", "text": "会話の中で、何を話題にすればよいか思いつかないことが多い。", "imageUrl": "https://picsum.photos/seed/comm-q05/640/420", "axisWeights": { "topic": 1 } },
-    { "id": "q06", "text": "会話を広げるためのネタを自然に思いつける。", "imageUrl": "https://picsum.photos/seed/comm-q06/640/420", "axisWeights": { "topic": 1 }, "reverse": true },
-    { "id": "q07", "text": "相手の話に対して、何を返せばいいか迷うことが多い。", "imageUrl": "https://picsum.photos/seed/comm-q07/640/420", "axisWeights": { "response": 1 } },
-    { "id": "q08", "text": "相手の発言に対して、自然に質問や返答を思いつける。", "imageUrl": "https://picsum.photos/seed/comm-q08/640/420", "axisWeights": { "response": 1 }, "reverse": true },
-    { "id": "q09", "text": "頭の中では考えているのに、うまく言葉にできない。", "imageUrl": "https://picsum.photos/seed/comm-q09/640/420", "axisWeights": { "expression": 1 } },
-    { "id": "q10", "text": "言いたいことはあるが、適切な表現が見つからず止まってしまう。", "imageUrl": "https://picsum.photos/seed/comm-q10/640/420", "axisWeights": { "expression": 1 } },
-    { "id": "q11", "text": "伝えたい内容を順序立てて話せる。", "imageUrl": "https://picsum.photos/seed/comm-q11/640/420", "axisWeights": { "structure": 1 }, "reverse": true },
-    { "id": "q12", "text": "話している途中で、自分が何を言いたいのか分からなくなることがある。", "imageUrl": "https://picsum.photos/seed/comm-q12/640/420", "axisWeights": { "structure": 1 } },
-    { "id": "q13", "text": "会話に入るタイミングがつかめず、発言を見送ることが多い。", "imageUrl": "https://picsum.photos/seed/comm-q13/640/420", "axisWeights": { "timing": 0.7, "context": 0.3 } },
-    { "id": "q14", "text": "話し始めるべき場面で、ためらってしまうことが多い。", "imageUrl": "https://picsum.photos/seed/comm-q14/640/420", "axisWeights": { "timing": 0.6, "emotion": 0.4 } },
-    { "id": "q15", "text": "緊張すると、声が出にくくなったり言葉が詰まったりする。", "imageUrl": "https://picsum.photos/seed/comm-q15/640/420", "axisWeights": { "emotion": 0.8, "expression": 0.2 } },
-    { "id": "q16", "text": "会話中にミスを恐れて、言いたいことがあっても控えてしまう。", "imageUrl": "https://picsum.photos/seed/comm-q16/640/420", "axisWeights": { "emotion": 0.7, "timing": 0.3 } },
-    { "id": "q17", "text": "人と話す機会が少なく、慣れていないと感じる。", "imageUrl": "https://picsum.photos/seed/comm-q17/640/420", "axisWeights": { "experience": 1 } },
-    { "id": "q18", "text": "会話で『うまく話せた』と感じる経験があまりない。", "imageUrl": "https://picsum.photos/seed/comm-q18/640/420", "axisWeights": { "experience": 1 } },
-    { "id": "q19", "text": "会話を重ねることで、少しずつ上達している実感がある。", "imageUrl": "https://picsum.photos/seed/comm-q19/640/420", "axisWeights": { "experience": 1 }, "reverse": true },
-    { "id": "q20", "text": "人と話すことに、ある程度慣れている。", "imageUrl": "https://picsum.photos/seed/comm-q20/640/420", "axisWeights": { "experience": 1 }, "reverse": true },
-    { "id": "q21", "text": "相手に合わせて、話し方や言葉選びを調整できる。", "imageUrl": "https://picsum.photos/seed/comm-q21/640/420", "axisWeights": { "context": 0.5, "expression": 0.5 }, "reverse": true },
-    { "id": "q22", "text": "会話の途中で、相手が退屈していそうかどうかを察知できる。", "imageUrl": "https://picsum.photos/seed/comm-q22/640/420", "axisWeights": { "context": 1 }, "reverse": true },
-    { "id": "q23", "text": "沈黙が続くと、焦りが強くなる。", "imageUrl": "https://picsum.photos/seed/comm-q23/640/420", "axisWeights": { "emotion": 0.5, "timing": 0.5 } },
-    { "id": "q24", "text": "相手の話の意図をつかみ損ねて、返答に困ることがある。", "imageUrl": "https://picsum.photos/seed/comm-q24/640/420", "axisWeights": { "response": 0.6, "context": 0.4 } },
-    { "id": "q25", "text": "聞いた内容を踏まえて、自分の意見や感想を返すのが得意だ。", "imageUrl": "https://picsum.photos/seed/comm-q25/640/420", "axisWeights": { "response": 1 }, "reverse": true },
-    { "id": "q26", "text": "長く話そうとすると、話の筋道が崩れやすい。", "imageUrl": "https://picsum.photos/seed/comm-q26/640/420", "axisWeights": { "structure": 1 } },
-    { "id": "q27", "text": "短くても、要点を押さえて伝えられる。", "imageUrl": "https://picsum.photos/seed/comm-q27/640/420", "axisWeights": { "structure": 0.5, "expression": 0.5 }, "reverse": true },
-    { "id": "q28", "text": "思いついたことを、その場で言葉にするのが苦手だ。", "imageUrl": "https://picsum.photos/seed/comm-q28/640/420", "axisWeights": { "expression": 0.7, "timing": 0.3 } },
-    { "id": "q29", "text": "複数人の会話では、発言のタイミングがさらに難しく感じる。", "imageUrl": "https://picsum.photos/seed/comm-q29/640/420", "axisWeights": { "timing": 0.6, "context": 0.4 } },
-    { "id": "q30", "text": "多少うまくいかなくても、次の会話でまた試してみようと思える。", "imageUrl": "https://picsum.photos/seed/comm-q30/640/420", "axisWeights": { "experience": 0.7, "emotion": 0.3 }, "reverse": true },
-    { "id": "q31", "text": "相手の話を聞きながら、返答を考えるのが難しい。", "imageUrl": "https://picsum.photos/seed/comm-q31/640/420", "axisWeights": { "response": 0.6, "topic": 0.4 } },
-    { "id": "q32", "text": "雑談では特に、何を言えばよいか分からなくなる。", "imageUrl": "https://picsum.photos/seed/comm-q32/640/420", "axisWeights": { "topic": 0.8, "context": 0.2 } }
+    {
+      "id": "q01",
+      "text": "会話が一瞬止まったとき、自分から話し始めることが多い",
+      "imageUrl": "https://picsum.photos/seed/comm-q01/640/420",
+      "axisWeights": { "timing": 1 },
+      "reverse": false
+    },
+    {
+      "id": "q02",
+      "text": "誰かが話し終わったあと、発言するか迷うことがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q02/640/420",
+      "axisWeights": { "timing": 1 },
+      "reverse": true
+    },
+    {
+      "id": "q03",
+      "text": "相手が話している途中で被ってしまうことがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q03/640/420",
+      "axisWeights": { "timing": 1 },
+      "reverse": true
+    },
+    {
+      "id": "q04",
+      "text": "グループでの会話で発言のタイミングを逃すことがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q04/640/420",
+      "axisWeights": { "timing": 1 },
+      "reverse": true
+    },
+    {
+      "id": "q05",
+      "text": "「最近どう？」と聞かれてすぐに話題が出てくる",
+      "imageUrl": "https://picsum.photos/seed/comm-q05/640/420",
+      "axisWeights": { "thinking": 1 },
+      "reverse": false
+    },
+    {
+      "id": "q06",
+      "text": "相手の話に対して返事がすぐ思いつかないことがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q06/640/420",
+      "axisWeights": { "thinking": 1 },
+      "reverse": true
+    },
+    {
+      "id": "q07",
+      "text": "会話中に「次に何を聞こうか」と考えられる",
+      "imageUrl": "https://picsum.photos/seed/comm-q07/640/420",
+      "axisWeights": { "thinking": 1 },
+      "reverse": false
+    },
+    {
+      "id": "q08",
+      "text": "話している途中で何を言いたかったか分からなくなることがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q08/640/420",
+      "axisWeights": { "thinking": 1 },
+      "reverse": true
+    },
+    {
+      "id": "q09",
+      "text": "頭では分かっているのに言葉が出てこないことがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q09/640/420",
+      "axisWeights": { "technical": 1 },
+      "reverse": true
+    },
+    {
+      "id": "q10",
+      "text": "出来事を順番に説明するのが得意だ",
+      "imageUrl": "https://picsum.photos/seed/comm-q10/640/420",
+      "axisWeights": { "technical": 1 },
+      "reverse": false
+    },
+    {
+      "id": "q11",
+      "text": "話したあと「うまく伝わらなかった」と感じることがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q11/640/420",
+      "axisWeights": { "technical": 1 },
+      "reverse": true
+    },
+    {
+      "id": "q12",
+      "text": "相手に分かりやすく言い直すことができる",
+      "imageUrl": "https://picsum.photos/seed/comm-q12/640/420",
+      "axisWeights": { "technical": 1 },
+      "reverse": false
+    },
+    {
+      "id": "q13",
+      "text": "会話の前に少し緊張することが多い",
+      "imageUrl": "https://picsum.photos/seed/comm-q13/640/420",
+      "axisWeights": { "emotion": 1 },
+      "reverse": true
+    },
+    {
+      "id": "q14",
+      "text": "間違えたらどうしようと考えて発言を控えることがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q14/640/420",
+      "axisWeights": { "emotion": 1 },
+      "reverse": true
+    },
+    {
+      "id": "q15",
+      "text": "仲のいい人とは自然に話せる",
+      "imageUrl": "https://picsum.photos/seed/comm-q15/640/420",
+      "axisWeights": { "emotion": 1 },
+      "reverse": false
+    },
+    {
+      "id": "q16",
+      "text": "初対面の人だと急に話しづらくなる",
+      "imageUrl": "https://picsum.photos/seed/comm-q16/640/420",
+      "axisWeights": { "emotion": 1 },
+      "reverse": true
+    },
+    {
+      "id": "q17",
+      "text": "1日の中で人と話す時間が少ないと感じる",
+      "imageUrl": "https://picsum.photos/seed/comm-q17/640/420",
+      "axisWeights": { "experience": 1 },
+      "reverse": true
+    },
+    {
+      "id": "q18",
+      "text": "「会話がうまくいった」と思えることがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q18/640/420",
+      "axisWeights": { "experience": 1 },
+      "reverse": false
+    },
+    {
+      "id": "q19",
+      "text": "話す回数が増えてきて慣れてきたと感じる",
+      "imageUrl": "https://picsum.photos/seed/comm-q19/640/420",
+      "axisWeights": { "experience": 1 },
+      "reverse": false
+    },
+    {
+      "id": "q20",
+      "text": "人と話すことにあまり抵抗がない",
+      "imageUrl": "https://picsum.photos/seed/comm-q20/640/420",
+      "axisWeights": { "experience": 1 },
+      "reverse": false
+    },
+    {
+      "id": "q21",
+      "text": "相手の話に「へぇ」「なるほど」と反応することが多い",
+      "imageUrl": "https://picsum.photos/seed/comm-q21/640/420",
+      "axisWeights": { "listening": 1 },
+      "reverse": false
+    },
+    {
+      "id": "q22",
+      "text": "話を聞きながら次に自分が何を言うか考えていることがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q22/640/420",
+      "axisWeights": { "listening": 1 },
+      "reverse": true
+    },
+    {
+      "id": "q23",
+      "text": "相手の目を見て話を聞いている",
+      "imageUrl": "https://picsum.photos/seed/comm-q23/640/420",
+      "axisWeights": { "listening": 1 },
+      "reverse": false
+    },
+    {
+      "id": "q24",
+      "text": "相手の話にあまりリアクションしていないと感じることがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q24/640/420",
+      "axisWeights": { "listening": 1 },
+      "reverse": true
+    },
+    {
+      "id": "q25",
+      "text": "話すときに表情があまり変わらないと言われることがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q25/640/420",
+      "axisWeights": { "nonverbal": 1 },
+      "reverse": true
+    },
+    {
+      "id": "q26",
+      "text": "身振りや手振りを使って話すことがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q26/640/420",
+      "axisWeights": { "nonverbal": 1 },
+      "reverse": false
+    },
+    {
+      "id": "q27",
+      "text": "声が小さいと言われることがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q27/640/420",
+      "axisWeights": { "nonverbal": 1 },
+      "reverse": true
+    },
+    {
+      "id": "q28",
+      "text": "話しているときの雰囲気を意識している",
+      "imageUrl": "https://picsum.photos/seed/comm-q28/640/420",
+      "axisWeights": { "nonverbal": 1 },
+      "reverse": false
+    },
+    {
+      "id": "q29",
+      "text": "友達と話すときと先生と話すときで話し方を変えている",
+      "imageUrl": "https://picsum.photos/seed/comm-q29/640/420",
+      "axisWeights": { "situation": 1 },
+      "reverse": false
+    },
+    {
+      "id": "q30",
+      "text": "初対面の人との雑談が苦手だ",
+      "imageUrl": "https://picsum.photos/seed/comm-q30/640/420",
+      "axisWeights": { "situation": 1 },
+      "reverse": true
+    },
+    {
+      "id": "q31",
+      "text": "真面目な話と軽い雑談を切り替えられる",
+      "imageUrl": "https://picsum.photos/seed/comm-q31/640/420",
+      "axisWeights": { "situation": 1 },
+      "reverse": false
+    },
+    {
+      "id": "q32",
+      "text": "場に合わないことを言ってしまったと後から思うことがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q32/640/420",
+      "axisWeights": { "situation": 1 },
+      "reverse": true
+    }
   ]
 }
