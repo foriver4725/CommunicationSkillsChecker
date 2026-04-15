@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>コミュニケーション診断</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section id="screen-intro" class="screen active card intro-card">
+      <div class="eyebrow">Communication Diagnosis</div>
+      <h1>コミュニケーションの苦手ポイント診断</h1>
+      <p class="lead">
+        質問に答えることで、苦手になりやすい工程や傾向を可視化します。<br />
+        軸や質問はあとから差し替えやすいデータ構造にしてあります。
+      </p>
+
+      <div class="intro-grid">
+        <div>
+          <h2>使い方</h2>
+          <ul>
+            <li>質問は 1 ページずつ表示されます</li>
+            <li>前へ / 次へ で移動できます</li>
+            <li>最後に提出すると結果が確定します</li>
+          </ul>
+        </div>
+        <div>
+          <h2>現在の設定</h2>
+          <ul id="axis-preview"></ul>
+        </div>
+      </div>
+
+      <div class="intro-actions">
+        <button id="start-button" class="button button-primary">診断を開始</button>
+      </div>
+    </section>
+
+    <section id="screen-questionnaire" class="screen card">
+      <header class="questionnaire-header">
+        <div>
+          <p id="progress-text" class="progress-text"></p>
+          <div class="progress-bar" aria-hidden="true">
+            <div id="progress-bar-fill" class="progress-bar-fill"></div>
+          </div>
+        </div>
+        <button id="back-to-top-button" class="button button-ghost" type="button">最初に戻る</button>
+      </header>
+
+      <div class="question-card">
+        <p id="question-axis-tags" class="axis-tags"></p>
+        <h2 id="question-text" class="question-text"></h2>
+        <p class="question-help">もっとも近いものを選んでください。</p>
+
+        <fieldset class="likert-fieldset">
+          <legend class="sr-only">回答を選択</legend>
+          <div id="likert-options" class="likert-options"></div>
+        </fieldset>
+      </div>
+
+      <footer class="questionnaire-footer">
+        <button id="prev-button" class="button button-secondary" type="button">戻る</button>
+        <button id="next-button" class="button button-primary" type="button">次へ</button>
+      </footer>
+    </section>
+
+    <section id="screen-result" class="screen card result-card">
+      <div class="eyebrow">Result</div>
+      <h1>診断結果</h1>
+      <p class="lead">
+        各軸のスコアを表示しています。<br />
+        数値は、回答内容から算出した相対的な傾向です。
+      </p>
+
+      <div class="result-layout">
+        <div class="chart-panel">
+          <canvas id="radar-chart" width="560" height="560" aria-label="レーダーチャート"></canvas>
+        </div>
+        <div class="summary-panel">
+          <h2>軸ごとの結果</h2>
+          <div id="score-list" class="score-list"></div>
+        </div>
+      </div>
+
+      <div class="result-actions">
+        <button id="retry-button" class="button button-secondary" type="button">もう一度診断する</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
