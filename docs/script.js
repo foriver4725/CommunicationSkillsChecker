@@ -1,4 +1,5 @@
 const DATA_URL = "./diagnosis-data.json";
+// const DATA_URL = "./diagnosis-data-dummy.json";
 
 const state = {
   data: null,
@@ -102,7 +103,7 @@ function bindEvents() {
   prevButton.addEventListener("click", handlePrevPage);
   nextButton.addEventListener("click", handleNextPage);
   retryButton.addEventListener("click", resetDiagnosis);
-  backToTopButton.addEventListener("click", () => showScreen("intro"));
+  backToTopButton.addEventListener("click", handleBackToTop);
 }
 
 function startDiagnosis() {
@@ -114,6 +115,21 @@ function startDiagnosis() {
 }
 
 function resetDiagnosis() {
+  showScreen("intro");
+}
+
+function handleBackToTop() {
+  const ok = window.confirm(
+    "ここまでの回答はリセットされます。\n最初に戻りますか？"
+  );
+
+  if (!ok) {
+    return;
+  }
+
+  state.answers = {};
+  state.currentPageIndex = 0;
+  state.shuffledQuestions = [];
   showScreen("intro");
 }
 

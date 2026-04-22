@@ -481,11 +481,18 @@ ul {
   border: 0;
 }
 
+@media (max-width: 1200px) {
+  .result-layout {
+    gap: 48px;
+  }
+}
+
 @media (max-width: 900px) {
 
   .intro-grid,
   .result-layout {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .question-item-inner {
