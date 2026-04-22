@@ -1,4 +1,4 @@
-const DATA_URL = "./diagnosis-data-dummy.json";
+const DATA_URL = "./diagnosis-data.json";
 
 const state = {
   data: null,
