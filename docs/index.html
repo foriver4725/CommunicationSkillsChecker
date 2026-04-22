@@ -1,31 +1,56 @@
 <!doctype html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>コミュニケーション診断</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <main class="app-shell">
     <section id="screen-intro" class="screen active card intro-card">
       <div class="eyebrow">Communication Diagnosis</div>
+
       <h1 id="app-title">コミュニケーションの苦手ポイント診断</h1>
-      <p id="app-description" class="lead"></p>
+
+      <p class="lead">
+        質問に答えるだけで、あなたが会話でつまずきやすいポイントを分析します。<br>
+        タイミング・思考・緊張・聞く力など、複数の視点から傾向を可視化します。
+      </p>
 
       <div class="intro-grid">
         <div>
-          <h2>使い方</h2>
-          <ul id="intro-steps"></ul>
+          <h2>診断の進め方</h2>
+          <ul>
+            <li>全32問・約3分で完了します</li>
+            <li>4択でテンポよく回答します</li>
+            <li>深く考えず、直感で選んでください</li>
+            <li>最後に結果をグラフで表示します</li>
+          </ul>
         </div>
+
         <div>
-          <h2>現在の軸</h2>
-          <ul id="axis-preview"></ul>
+          <h2>こんな人におすすめ</h2>
+          <ul>
+            <li>会話に入るタイミングがわからない</li>
+            <li>何を話せばいいか迷う</li>
+            <li>緊張してうまく話せない</li>
+            <li>雑談が苦手</li>
+            <li>話したあと反省してしまう</li>
+          </ul>
         </div>
       </div>
 
+      <p class="lead" style="margin-top:0;">
+        ※ 正解・不正解はありません。今のあなたの傾向を見る診断です。
+      </p>
+
       <div class="intro-actions">
-        <button id="start-button" class="button button-primary">診断を開始</button>
+        <button id="start-button" class="button button-primary">
+          無料で診断を始める
+        </button>
       </div>
     </section>
 
@@ -74,4 +99,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>

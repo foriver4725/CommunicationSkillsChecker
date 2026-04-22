@@ -191,7 +191,6 @@ function createQuestionCard(question, questionNumber) {
   const wrapper = document.createElement("article");
   wrapper.className = "question-item";
 
-  const tags = axisNamesFromWeights(question.axisWeights).join(" / ");
   const visualHtml = question.imageUrl
     ? `<img class="question-image" src="${escapeHtml(question.imageUrl)}" alt="質問のイメージ画像" loading="lazy" />`
     : `<div class="question-image-placeholder">画像URLを設定すると、ここに表示されます。</div>`;
@@ -201,7 +200,6 @@ function createQuestionCard(question, questionNumber) {
       <div class="question-visual">${visualHtml}</div>
       <div class="question-body">
         <p class="question-number">質問 ${questionNumber}</p>
-        <p class="axis-tags">${escapeHtml(tags)}</p>
         <h2 class="question-text">${escapeHtml(question.text)}</h2>
         <p class="question-help">もっとも近いものを選んでください。</p>
         <fieldset class="likert-fieldset">
