@@ -145,10 +145,35 @@ ul {
 }
 
 .top-axes-text {
-  margin: 0 0 20px;
+  margin: -4px 0 28px 320px;
   color: var(--primary);
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.top-axes-label {
+  display: block;
+  margin-bottom: 8px;
+
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.top-axes-value {
+  display: block;
+
+  color: var(--primary);
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.top-axes-text::first-line {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-muted);
 }
 
 .progress-bar {
@@ -388,6 +413,10 @@ ul {
   align-items: start;
 }
 
+.result-card {
+  position: relative;
+}
+
 .chart-panel,
 .summary-panel {
   padding: 20px;
@@ -465,6 +494,19 @@ ul {
     min-height: 180px;
     border-right: 0;
     border-bottom: 1px solid var(--border);
+  }
+
+  .top-axes-text {
+    margin: 0 0 20px;
+    font-size: 20px;
+  }
+
+  .top-axes-label {
+    font-size: 14px;
+  }
+
+  .top-axes-value {
+    font-size: 26px;
   }
 }
 

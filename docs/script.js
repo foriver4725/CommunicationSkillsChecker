@@ -1,4 +1,4 @@
-const DATA_URL = "./diagnosis-data.json";
+const DATA_URL = "./diagnosis-data-dummy.json";
 
 const state = {
   data: null,
@@ -184,19 +184,15 @@ function getTopAxesSummary(scores = calculateScores()) {
     return "";
   }
 
-  const sortedScores = [...scores].sort((a, b) => b.score - a.score);
-  const topScore = sortedScores[0]?.score ?? 0;
+  let topItem = scores[0];
 
-  const topAxes = sortedScores
-    .filter((item) => item.score === topScore)
-    .slice(0, 3)
-    .map((item) => item.label);
-
-  if (topAxes.length === 0) {
-    return "";
+  for (let i = 1; i < scores.length; i += 1) {
+    if (scores[i].score > topItem.score) {
+      topItem = scores[i];
+    }
   }
 
-  return `高かった分野: ${topAxes.join(" / ")}`;
+  return `あなたの強みは「${escapeHtml(topItem.label)}」です`;
 }
 
 function renderQuestionPage() {
