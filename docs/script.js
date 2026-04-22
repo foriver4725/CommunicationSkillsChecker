@@ -27,6 +27,7 @@ const prevButton = document.getElementById("prev-button");
 const nextButton = document.getElementById("next-button");
 const backToTopButton = document.getElementById("back-to-top-button");
 const retryButton = document.getElementById("retry-button");
+const shareXButton = document.getElementById("share-x-button");
 const scoreList = document.getElementById("score-list");
 const radarChart = document.getElementById("radar-chart");
 
@@ -102,8 +103,9 @@ function bindEvents() {
   startButton.addEventListener("click", startDiagnosis);
   prevButton.addEventListener("click", handlePrevPage);
   nextButton.addEventListener("click", handleNextPage);
-  retryButton.addEventListener("click", resetDiagnosis);
+  retryButton.addEventListener("click", handleRetryDiagnosis);
   backToTopButton.addEventListener("click", handleBackToTop);
+  shareXButton.addEventListener("click", handleShareX);
 }
 
 function startDiagnosis() {
@@ -131,6 +133,49 @@ function handleBackToTop() {
   state.currentPageIndex = 0;
   state.shuffledQuestions = [];
   showScreen("intro");
+}
+
+function handleRetryDiagnosis() {
+  const ok = window.confirm(
+    "現在の診断結果はリセットされます。\nもう一度診断しますか？"
+  );
+
+  if (!ok) {
+    return;
+  }
+
+  state.answers = {};
+  state.currentPageIndex = 0;
+  state.shuffledQuestions = [];
+  showScreen("intro");
+}
+
+function handleShareX() {
+  const scores = calculateScores();
+
+  if (!scores.length) {
+    return;
+  }
+
+  let topItem = scores[0];
+
+  for (let i = 1; i < scores.length; i += 1) {
+    if (scores[i].score > topItem.score) {
+      topItem = scores[i];
+    }
+  }
+
+  const text =
+    `コミュニケーションの苦手ポイント診断をやってみた！\n` +
+    `私の強みは「${topItem.label}」でした。\n` +
+    `あなたも試してみてね。\n` +
+    `#コミュニケーション診断`;
+
+  const pageUrl = window.location.href;
+  const url =
+    "https://x.com/intent/post?text=" + encodeURIComponent(text) +
+    "&url=" + encodeURIComponent(pageUrl);
+  window.open(url, "_blank", "noopener,noreferrer");
 }
 
 function showScreen(screenKey) {
