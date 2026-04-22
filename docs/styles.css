@@ -637,3 +637,21 @@ ul {
     word-break: break-word;
   }
 }
+
+@media (max-width: 430px) {
+  .likert-option label {
+    padding: 8px;
+  }
+
+  .likert-label {
+    font-size: 12px;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 390px) {
+  .likert-label {
+    font-size: 11px;
+  }
+}
