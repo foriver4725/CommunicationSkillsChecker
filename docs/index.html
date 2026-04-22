@@ -32,21 +32,30 @@
     </section>
 
     <section id="screen-questionnaire" class="screen card questionnaire-card">
-      <header class="questionnaire-header">
-        <div class="questionnaire-header-main">
+      <div id="question-list" class="question-list"></div>
+
+      <footer class="questionnaire-footer">
+        <div class="questionnaire-footer-main">
           <p id="progress-text" class="progress-text"></p>
+
           <div class="progress-bar" aria-hidden="true">
             <div id="progress-bar-fill" class="progress-bar-fill"></div>
           </div>
         </div>
-      </header>
 
-      <div id="question-list" class="question-list"></div>
+        <div class="questionnaire-footer-actions">
+          <button id="back-to-top-button" class="button button-ghost" type="button">
+            最初に戻る
+          </button>
 
-      <footer class="questionnaire-footer">
-        <button id="prev-button" class="button button-secondary" type="button">戻る</button>
-        <button id="next-button" class="button button-primary" type="button">次へ</button>
-        <button id="back-to-top-button" class="button button-ghost" type="button">最初に戻る</button>
+          <button id="prev-button" class="button button-secondary" type="button">
+            戻る
+          </button>
+
+          <button id="next-button" class="button button-primary" type="button">
+            次へ
+          </button>
+        </div>
       </footer>
     </section>
 

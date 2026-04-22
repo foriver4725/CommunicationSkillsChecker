@@ -169,6 +169,7 @@ ul {
 .question-list {
   display: grid;
   gap: 14px;
+  padding-top: 12px;
   padding-bottom: 24px;
 }
 
@@ -334,15 +335,50 @@ ul {
   position: sticky;
   bottom: 0;
   z-index: 20;
+
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 18px;
+
   margin: 20px -28px -28px;
   padding: 16px 28px 18px;
-  background: rgba(255, 255, 255, 0.92);
+
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+
   border-top: 1px solid var(--border);
+}
+
+.questionnaire-footer-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.questionnaire-footer-main .progress-text {
+  margin: 0 0 8px;
+}
+
+.questionnaire-footer-main .progress-bar {
+  width: 100%;
+  max-width: 420px;
+}
+
+.questionnaire-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* 最初に戻るだけ少し離す */
+#back-to-top-button {
+  margin-right: 8px;
+}
+
+#next-button {
+  min-width: 110px;
 }
 
 .result-layout {
@@ -445,11 +481,24 @@ ul {
   .questionnaire-footer {
     margin: 16px -18px -18px;
     padding: 14px 18px;
-    flex-wrap: wrap;
+
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .questionnaire-footer .button {
-    flex: 1 1 calc(50% - 6px);
+  .questionnaire-footer-main .progress-bar {
+    max-width: none;
+  }
+
+  .questionnaire-footer-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+
+  #back-to-top-button {
+    margin-right: 0;
   }
 
   .result-actions,
