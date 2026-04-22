@@ -19,6 +19,7 @@ const introSteps = document.getElementById("intro-steps");
 const axisPreview = document.getElementById("axis-preview");
 const startButton = document.getElementById("start-button");
 const progressText = document.getElementById("progress-text");
+const topAxesText = document.getElementById("top-axes-text");
 const progressBarFill = document.getElementById("progress-bar-fill");
 const questionList = document.getElementById("question-list");
 const prevButton = document.getElementById("prev-button");
@@ -141,6 +142,7 @@ function handlePrevPage() {
   if (state.currentPageIndex > 0) {
     state.currentPageIndex -= 1;
     renderQuestionPage();
+    scrollQuestionnaireToTop();
   }
 }
 
@@ -162,16 +164,56 @@ function handleNextPage() {
 
   state.currentPageIndex += 1;
   renderQuestionPage();
+  scrollQuestionnaireToTop();
+}
+
+function scrollQuestionnaireToTop() {
+  const header = document.querySelector(".questionnaire-header");
+  const headerBottom = header
+    ? header.getBoundingClientRect().bottom + window.scrollY
+    : 0;
+
+  window.scrollTo({
+    top: Math.max(headerBottom - 8, 0),
+    behavior: "smooth",
+  });
+}
+
+function getTopAxesSummary(scores = calculateScores()) {
+  if (!scores.length) {
+    return "";
+  }
+
+  const sortedScores = [...scores].sort((a, b) => b.score - a.score);
+  const topScore = sortedScores[0]?.score ?? 0;
+
+  const topAxes = sortedScores
+    .filter((item) => item.score === topScore)
+    .slice(0, 3)
+    .map((item) => item.label);
+
+  if (topAxes.length === 0) {
+    return "";
+  }
+
+  return `高かった分野: ${topAxes.join(" / ")}`;
 }
 
 function renderQuestionPage() {
   const questions = getQuestionsForCurrentPage();
-  const totalPages = getTotalPages();
-  const progress = ((state.currentPageIndex + 1) / totalPages) * 100;
+  const totalQuestions = state.shuffledQuestions.length;
   const pageStartQuestionNumber = state.currentPageIndex * getPageSize() + 1;
   const pageEndQuestionNumber = pageStartQuestionNumber + questions.length - 1;
 
-  progressText.textContent = `ページ ${state.currentPageIndex + 1} / ${totalPages}（質問 ${pageStartQuestionNumber}〜${pageEndQuestionNumber}）`;
+  const savedAnsweredCount = Object.keys(state.answers).length;
+  const currentPageAnsweredCount = questions.filter((question) => {
+    return getSelectedLikertValue(question.id) !== null || typeof state.answers[question.id] === "number";
+  }).length;
+
+  const progressCount = Math.min(savedAnsweredCount + currentPageAnsweredCount, totalQuestions);
+  const progress = (progressCount / totalQuestions) * 100;
+
+  progressText.textContent = `${progressCount} / ${totalQuestions} 問回答`;
   progressBarFill.style.width = `${progress}%`;
 
   questionList.innerHTML = "";
@@ -180,8 +222,9 @@ function renderQuestionPage() {
     questionList.appendChild(createQuestionCard(question, questionNumber));
   });
 
+  const isLastPage = state.currentPageIndex === getTotalPages() - 1;
+  nextButton.textContent = isLastPage ? "提出する" : "次へ";
   prevButton.disabled = state.currentPageIndex === 0;
-  nextButton.textContent = state.currentPageIndex === totalPages - 1 ? "提出する" : "次へ";
 }
 
 function createQuestionCard(question, questionNumber) {
@@ -255,6 +298,7 @@ function showResults() {
   const scores = calculateScores();
   renderScoreList(scores);
   drawRadarChart(scores);
+  topAxesText.textContent = getTopAxesSummary(scores);
   showScreen("result");
 }
 
