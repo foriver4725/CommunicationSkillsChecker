@@ -21,7 +21,7 @@ const axisPreview = document.getElementById("axis-preview");
 const startButton = document.getElementById("start-button");
 const progressText = document.getElementById("progress-text");
 const topAxesText = document.getElementById("top-axes-text");
-const progressBarFill = document.getElementById("progress-bar-fill");
+const progressPages = document.getElementById("progress-pages");
 const questionList = document.getElementById("question-list");
 const prevButton = document.getElementById("prev-button");
 const nextButton = document.getElementById("next-button");
@@ -97,6 +97,26 @@ function renderIntro() {
   質問への回答から、会話の中でつまずきやすい傾向を整理して表示します。<br />
   正解・不正解はなく、現在の傾向を知るための診断です。
 `;
+}
+
+function renderProgressPages() {
+  const totalPages = getTotalPages();
+  progressPages.innerHTML = "";
+
+  for (let pageIndex = 0; pageIndex < totalPages; pageIndex += 1) {
+    const block = document.createElement("div");
+    const status = getPageStatus(pageIndex);
+
+    block.className = "progress-page-block";
+    block.classList.add(`is-${status}`);
+
+    if (pageIndex === state.currentPageIndex) {
+      block.classList.add("is-current");
+    }
+
+    block.title = `ページ ${pageIndex + 1}`;
+    progressPages.appendChild(block);
+  }
 }
 
 function bindEvents() {
@@ -198,6 +218,34 @@ function getQuestionsForCurrentPage() {
   return state.shuffledQuestions.slice(start, start + pageSize);
 }
 
+function getPageQuestions(pageIndex) {
+  const pageSize = getPageSize();
+  const start = pageIndex * pageSize;
+  return state.shuffledQuestions.slice(start, start + pageSize);
+}
+
+function getPageStatus(pageIndex) {
+  const pageQuestions = getPageQuestions(pageIndex);
+
+  if (pageQuestions.length === 0) {
+    return "unanswered";
+  }
+
+  const answeredCount = pageQuestions.filter((question) => {
+    return typeof state.answers[question.id] === "number";
+  }).length;
+
+  if (answeredCount === 0) {
+    return "unanswered";
+  }
+
+  if (answeredCount === pageQuestions.length) {
+    return "complete";
+  }
+
+  return "incomplete";
+}
+
 function handlePrevPage() {
   saveCurrentPageAnswers();
   if (state.currentPageIndex > 0) {
@@ -208,17 +256,21 @@ function handlePrevPage() {
 }
 
 function handleNextPage() {
-  const currentPageQuestions = getQuestionsForCurrentPage();
-  const unansweredQuestion = currentPageQuestions.find((question) => getSelectedLikertValue(question.id) === null);
-
-  if (unansweredQuestion) {
-    window.alert("このページの質問にすべて回答してください。");
-    return;
-  }
-
   saveCurrentPageAnswers();
 
-  if (state.currentPageIndex === getTotalPages() - 1) {
+  const isLastPage = state.currentPageIndex === getTotalPages() - 1;
+
+  if (isLastPage) {
+    const unansweredQuestions = state.shuffledQuestions.filter((question) => {
+      return typeof state.answers[question.id] !== "number";
+    });
+
+    if (unansweredQuestions.length > 0) {
+      window.alert("未回答の質問があります。赤いページを確認してください。");
+      renderQuestionPage();
+      return;
+    }
+
     showResults();
     return;
   }
@@ -266,10 +318,9 @@ function renderQuestionPage() {
   const pageEndQuestionNumber = pageStartQuestionNumber + questions.length - 1;
 
   const progressCount = Object.keys(state.answers).length;
-  const progress = (progressCount / totalQuestions) * 100;
 
   progressText.textContent = `${progressCount} / ${totalQuestions} 問回答`;
-  progressBarFill.style.width = `${progress}%`;
+  renderProgressPages();
 
   questionList.innerHTML = "";
   questions.forEach((question, index) => {
