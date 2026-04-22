@@ -142,7 +142,7 @@ function resetDiagnosis() {
 
 function handleBackToTop() {
   const ok = window.confirm(
-    "ここまでの回答はリセットされます。\n最初に戻りますか？"
+    "ここまでの回答はリセットされます。\n診断をやめてタイトルへ戻りますか？"
   );
 
   if (!ok) {
@@ -271,6 +271,14 @@ function handleNextPage() {
       return;
     }
 
+    const ok = window.confirm(
+      "回答を確定して診断結果を表示します。\nこのまま結果を見ますか？"
+    );
+
+    if (!ok) {
+      return;
+    }
+
     showResults();
     return;
   }
@@ -329,7 +337,7 @@ function renderQuestionPage() {
   });
 
   const isLastPage = state.currentPageIndex === getTotalPages() - 1;
-  nextButton.textContent = isLastPage ? "提出する" : "次へ";
+  nextButton.textContent = isLastPage ? "結果を見る" : "次へ";
   prevButton.disabled = state.currentPageIndex === 0;
 }
 
