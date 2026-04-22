@@ -1,8 +1,8 @@
 // 本番用:
-const DATA_URL = "./diagnosis-data.json";
+// const DATA_URL = "./diagnosis-data.json";
 
 // テスト用:
-// const DATA_URL = "./diagnosis-data-dummy.json";
+const DATA_URL = "./diagnosis-data-dummy.json";
 
 // テスト用(質問1件だけ):
 // const DATA_URL = "./diagnosis-data-dummy-single.json";
@@ -284,6 +284,8 @@ function showScreen(screenKey) {
   Object.entries(screens).forEach(([key, element]) => {
     element.classList.toggle("active", key === screenKey);
   });
+
+  scrollPageToTop();
 }
 
 /**
@@ -387,7 +389,7 @@ function handlePrevPage() {
   state.visitedPages.add(state.currentPageIndex);
 
   renderQuestionPage();
-  scrollQuestionnaireToTop();
+  scrollPageToTop();
 }
 
 /**
@@ -422,7 +424,7 @@ function handleNextPage() {
   state.visitedPages.add(state.currentPageIndex);
 
   renderQuestionPage();
-  scrollQuestionnaireToTop();
+  scrollPageToTop();
 }
 
 /**
@@ -454,14 +456,10 @@ function isAnswered(questionId) {
 }
 
 /**
- * 質問ページを上側へスクロールする
- * 現状レイアウトではヘッダー固定ではないため、先頭へ戻す
+ * ページを先頭までスクロールする
  */
-function scrollQuestionnaireToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
+function scrollPageToTop() {
+  window.scrollTo(0, 0);
 }
 
 /**
