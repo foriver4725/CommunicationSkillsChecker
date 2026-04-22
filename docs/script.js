@@ -80,9 +80,9 @@ function renderIntro() {
 
   introSteps.innerHTML = "";
   const steps = [
+    `全${state.data.questions.length}問に回答します`,
     `${data.pageSize ?? 5}問ずつ表示されます`,
-    "前へ / 次へ で移動できます",
-    "最後に提出すると結果が確定します",
+    "最後に提出すると結果が表示されます",
   ];
   steps.forEach((text) => {
     const li = document.createElement("li");
@@ -90,12 +90,10 @@ function renderIntro() {
     introSteps.appendChild(li);
   });
 
-  axisPreview.innerHTML = "";
-  data.axes.forEach((axis) => {
-    const li = document.createElement("li");
-    li.textContent = `${axis.label}：${axis.description ?? ""}`;
-    axisPreview.appendChild(li);
-  });
+  axisPreview.innerHTML = `
+  質問への回答から、会話の中でつまずきやすい傾向を整理して表示します。<br />
+  正解・不正解はなく、現在の傾向を知るための診断です。
+`;
 }
 
 function bindEvents() {

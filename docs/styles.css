@@ -90,7 +90,7 @@ h2 {
   margin: 28px 0;
 }
 
-.intro-grid > div {
+.intro-grid>div {
   padding: 18px;
   border: 1px solid var(--border);
   border-radius: 16px;
@@ -258,7 +258,7 @@ ul {
   border-color: var(--primary);
 }
 
-.likert-option input:checked + label {
+.likert-option input:checked+label {
   background: var(--primary-soft);
   border-color: var(--primary);
 }
@@ -381,6 +381,7 @@ ul {
 }
 
 @media (max-width: 900px) {
+
   .intro-grid,
   .result-layout {
     grid-template-columns: 1fr;
