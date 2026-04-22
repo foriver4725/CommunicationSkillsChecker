@@ -220,12 +220,7 @@ function renderQuestionPage() {
   const pageStartQuestionNumber = state.currentPageIndex * getPageSize() + 1;
   const pageEndQuestionNumber = pageStartQuestionNumber + questions.length - 1;
 
-  const savedAnsweredCount = Object.keys(state.answers).length;
-  const currentPageAnsweredCount = questions.filter((question) => {
-    return getSelectedLikertValue(question.id) !== null || typeof state.answers[question.id] === "number";
-  }).length;
-
-  const progressCount = Math.min(savedAnsweredCount + currentPageAnsweredCount, totalQuestions);
+  const progressCount = Object.keys(state.answers).length;
   const progress = (progressCount / totalQuestions) * 100;
 
   progressText.textContent = `${progressCount} / ${totalQuestions} 問回答`;
