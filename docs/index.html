@@ -61,18 +61,28 @@
 
     <section id="screen-result" class="screen card result-card">
       <div class="eyebrow">Result</div>
-      <h1>診断結果</h1>
-      <p class="lead">
-        各軸のスコアを表示しています。<br />
-        数値は、回答内容から算出した相対的な傾向です。
-      </p>
 
-      <p id="top-axes-text" class="top-axes-text"></p>
+      <div class="result-hero">
+        <div class="result-hero-main">
+          <h1>診断結果</h1>
+          <p class="lead">
+            各軸のスコアを表示しています。<br />
+            数値は、回答内容から算出した相対的な傾向です。
+          </p>
+        </div>
+      </div>
 
       <div class="result-layout">
-        <div class="chart-panel">
-          <canvas id="radar-chart" width="560" height="560" aria-label="レーダーチャート"></canvas>
+        <div class="result-left-column">
+          <div class="top-axes-card">
+            <div id="top-axes-text" class="top-axes-text"></div>
+          </div>
+
+          <div class="chart-panel">
+            <canvas id="radar-chart" width="560" height="560" aria-label="レーダーチャート"></canvas>
+          </div>
         </div>
+
         <div class="summary-panel">
           <h2>軸ごとの結果</h2>
           <div id="score-list" class="score-list"></div>

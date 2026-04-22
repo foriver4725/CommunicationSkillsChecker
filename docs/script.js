@@ -192,7 +192,10 @@ function getTopAxesSummary(scores = calculateScores()) {
     }
   }
 
-  return `あなたの強みは「${escapeHtml(topItem.label)}」です`;
+  return `
+    <span class="top-axes-label">あなたの強み</span>
+    <span class="top-axes-value">${escapeHtml(topItem.label)}</span>
+  `;
 }
 
 function renderQuestionPage() {
@@ -294,7 +297,7 @@ function showResults() {
   const scores = calculateScores();
   renderScoreList(scores);
   drawRadarChart(scores);
-  topAxesText.textContent = getTopAxesSummary(scores);
+  topAxesText.innerHTML = getTopAxesSummary(scores);
   showScreen("result");
 }
 
