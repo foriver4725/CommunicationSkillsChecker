@@ -249,8 +249,8 @@ function handleRetryDiagnosis() {
 }
 
 /**
- * X 共有
- * 現在の最上位軸を本文に含めて共有する
+ * 「Xで共有」ボタンのクリックを処理する
+ * Web Share API を優先的に使い、利用できない場合は X 共有用のインテントURLを開く
  */
 function handleShareX() {
   const scores = calculateScores();
@@ -268,6 +268,38 @@ function handleShareX() {
     `#コミュニケーション診断`;
 
   const pageUrl = window.location.href;
+  const shareData = {
+    title: "コミュニケーションの苦手ポイント診断",
+    text,
+    url: pageUrl,
+  };
+
+  const isMobile =
+    /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  if (
+    isMobile &&
+    typeof navigator.share === "function" &&
+    (!navigator.canShare || navigator.canShare(shareData))
+  ) {
+    navigator.share(shareData).catch((error) => {
+      // キャンセル時は何もしない
+      if (error && error.name === "AbortError") {
+        return;
+      }
+
+      openXIntent(text, pageUrl);
+    });
+    return;
+  }
+
+  openXIntent(text, pageUrl);
+}
+
+/**
+ * X 共有用のインテントURLを開く
+ */
+function openXIntent(text, pageUrl) {
   const url =
     "https://x.com/intent/post?text=" +
     encodeURIComponent(text) +
