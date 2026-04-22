@@ -7,6 +7,9 @@ const DATA_URL = "./diagnosis-data.json";
 // テスト用(質問1件だけ):
 // const DATA_URL = "./diagnosis-data-dummy-single.json";
 
+// X共有用URL
+const SHARE_URL = "https://github.com/foriver4725/CommunicationSkillsChecker/";
+
 /**
  * アプリ全体の状態
  * - data: 読み込んだ診断データ
@@ -267,7 +270,7 @@ function handleShareX() {
     `あなたも試してみてね。\n` +
     `#コミュニケーション診断`;
 
-  const pageUrl = window.location.href;
+  const pageUrl = SHARE_URL;
   const url =
     "https://x.com/intent/post?text=" +
     encodeURIComponent(text) +
