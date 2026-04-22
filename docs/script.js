@@ -1,8 +1,8 @@
 // 本番用:
-// const DATA_URL = "./diagnosis-data.json";
+const DATA_URL = "./diagnosis-data.json";
 
 // テスト用:
-const DATA_URL = "./diagnosis-data-dummy.json";
+// const DATA_URL = "./diagnosis-data-dummy.json";
 
 /**
  * アプリ全体の状態
