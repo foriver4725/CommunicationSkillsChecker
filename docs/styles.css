@@ -592,4 +592,48 @@ ul {
   .likert-options {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  /* 結果ページ余白調整 */
+  .result-layout {
+    gap: 18px;
+  }
+
+  .chart-panel,
+  .summary-panel,
+  .top-axes-card {
+    padding: 14px;
+  }
+
+  /* レーダーチャートを画面幅に収める */
+  #radar-chart {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  /* スコアヘッダー縦積み */
+  .score-item-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .score-item-value {
+    font-size: 14px;
+  }
+
+  /* 強み表示 */
+  .top-axes-value {
+    font-size: 2rem;
+    line-height: 1.1;
+    word-break: keep-all;
+  }
+
+  /* 長文ラベル折返し */
+  .score-item-title,
+  .likert-label {
+    word-break: break-word;
+  }
 }

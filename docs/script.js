@@ -4,6 +4,9 @@ const DATA_URL = "./diagnosis-data.json";
 // テスト用:
 // const DATA_URL = "./diagnosis-data-dummy.json";
 
+// テスト用(質問1件だけ):
+// const DATA_URL = "./diagnosis-data-dummy-single.json";
+
 /**
  * アプリ全体の状態
  * - data: 読み込んだ診断データ
@@ -585,10 +588,13 @@ function showResults() {
   const scores = calculateScores();
 
   renderScoreList(scores);
-  drawRadarChart(scores);
   topAxesText.innerHTML = buildTopAxesHtml(scores);
 
   showScreen("result");
+
+  requestAnimationFrame(() => {
+    drawRadarChart(scores);
+  });
 }
 
 /**
@@ -710,12 +716,18 @@ function renderScoreList(scores) {
 function drawRadarChart(scores) {
   const canvas = radarChart;
   const ctx = canvas.getContext("2d");
+  const parentWidth = canvas.parentElement.clientWidth;
+
+  const displaySize = Math.max(220, Math.min(parentWidth - 28, 420));
+
+  canvas.width = displaySize;
+  canvas.height = displaySize;
 
   const width = canvas.width;
   const height = canvas.height;
   const cx = width / 2;
   const cy = height / 2;
-  const radius = Math.min(width, height) * 0.34;
+  const radius = Math.min(width, height) * 0.28;
   const levels = 5;
 
   ctx.clearRect(0, 0, width, height);

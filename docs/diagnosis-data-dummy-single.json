@@ -1,0 +1,76 @@
+{
+  "title": "コミュニケーションの苦手ポイント診断",
+  "description": "質問に答えるだけで、会話の中でつまずきやすいポイントや得意な傾向を分析します。\n深く考えすぎず、今の感覚でお答えください。",
+  "pageSize": 5,
+  "likertScale": [
+    {
+      "value": 1,
+      "label": "当てはまらない"
+    },
+    {
+      "value": 2,
+      "label": "あまり当てはまらない"
+    },
+    {
+      "value": 3,
+      "label": "やや当てはまる"
+    },
+    {
+      "value": 4,
+      "label": "当てはまる"
+    }
+  ],
+  "axes": [
+    {
+      "id": "timing",
+      "label": "タイミング",
+      "description": "話し始める・入るタイミングをつかむ力"
+    },
+    {
+      "id": "thinking",
+      "label": "思考系",
+      "description": "話題や返しを考える力"
+    },
+    {
+      "id": "technical",
+      "label": "技術系",
+      "description": "考えを言葉にして伝える力"
+    },
+    {
+      "id": "emotion",
+      "label": "感情系",
+      "description": "緊張や不安に左右されにくい状態"
+    },
+    {
+      "id": "experience",
+      "label": "経験系",
+      "description": "場数や慣れ、成功体験の蓄積"
+    },
+    {
+      "id": "listening",
+      "label": "聞く力",
+      "description": "相手の話を受け取り反応する力"
+    },
+    {
+      "id": "nonverbal",
+      "label": "非言語",
+      "description": "表情・声・雰囲気など言葉以外の伝達"
+    },
+    {
+      "id": "situation",
+      "label": "シチュエーション",
+      "description": "相手や場面に応じて切り替える力"
+    }
+  ],
+  "questions": [
+    {
+      "id": "q01",
+      "text": "会話が一瞬止まったとき、自分から話し始めることが多い",
+      "imageUrl": "https://picsum.photos/seed/comm-q01/640/420",
+      "axisWeights": {
+        "timing": 1
+      },
+      "reverse": false
+    }
+  ]
+}
