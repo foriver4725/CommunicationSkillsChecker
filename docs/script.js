@@ -1,11 +1,13 @@
-const DATA_URL = "./diagnosis-data.json";
-// const DATA_URL = "./diagnosis-data-dummy.json";
+// const DATA_URL = "./diagnosis-data.json";
+const DATA_URL = "./diagnosis-data-dummy.json";
 
 const state = {
   data: null,
   shuffledQuestions: [],
   answers: {},
   currentPageIndex: 0,
+  visitedPages: new Set(),
+  leftPages: new Set(),
 };
 
 const screens = {
@@ -132,6 +134,9 @@ function startDiagnosis() {
   state.currentPageIndex = 0;
   state.answers = {};
   state.shuffledQuestions = shuffle([...state.data.questions]);
+  state.visitedPages = new Set([0]);
+  state.leftPages = new Set();
+
   showScreen("questionnaire");
   renderQuestionPage();
 }
@@ -167,6 +172,8 @@ function handleRetryDiagnosis() {
   state.answers = {};
   state.currentPageIndex = 0;
   state.shuffledQuestions = [];
+  state.visitedPages = new Set();
+  state.leftPages = new Set();
   showScreen("intro");
 }
 
@@ -231,16 +238,20 @@ function getPageStatus(pageIndex) {
     return "unanswered";
   }
 
+  if (!state.visitedPages.has(pageIndex)) {
+    return "unanswered";
+  }
+
   const answeredCount = pageQuestions.filter((question) => {
     return typeof state.answers[question.id] === "number";
   }).length;
 
-  if (answeredCount === 0) {
-    return "unanswered";
-  }
-
   if (answeredCount === pageQuestions.length) {
     return "complete";
+  }
+
+  if (!state.leftPages.has(pageIndex)) {
+    return "unanswered";
   }
 
   return "incomplete";
@@ -248,8 +259,12 @@ function getPageStatus(pageIndex) {
 
 function handlePrevPage() {
   saveCurrentPageAnswers();
+
   if (state.currentPageIndex > 0) {
+    state.leftPages.add(state.currentPageIndex);
     state.currentPageIndex -= 1;
+    state.visitedPages.add(state.currentPageIndex);
+
     renderQuestionPage();
     scrollQuestionnaireToTop();
   }
@@ -283,7 +298,9 @@ function handleNextPage() {
     return;
   }
 
+  state.leftPages.add(state.currentPageIndex);
   state.currentPageIndex += 1;
+  state.visitedPages.add(state.currentPageIndex);
   renderQuestionPage();
   scrollQuestionnaireToTop();
 }

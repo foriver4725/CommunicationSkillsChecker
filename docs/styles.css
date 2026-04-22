@@ -195,12 +195,11 @@ ul {
 }
 
 .progress-page-block.is-complete {
-  background: linear-gradient(90deg, #2563eb, #60a5fa);
+  background: #22c55e;
 }
 
 .progress-page-block.is-incomplete {
-  /* background: #ef4444; */
-  background: #22c55e;
+  background: #ef4444;
 }
 
 .progress-page-block.is-unanswered {

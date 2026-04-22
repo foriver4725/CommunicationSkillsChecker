@@ -71,6 +71,60 @@
         "timing": 1
       },
       "reverse": false
+    },
+    {
+      "id": "q02",
+      "text": "誰かが話し終わったあと、発言するか迷うことがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q02/640/420",
+      "axisWeights": {
+        "timing": 1
+      },
+      "reverse": true
+    },
+    {
+      "id": "q03",
+      "text": "相手が話している途中で被ってしまうことがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q03/640/420",
+      "axisWeights": {
+        "timing": 1
+      },
+      "reverse": true
+    },
+    {
+      "id": "q04",
+      "text": "グループでの会話で発言のタイミングを逃すことがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q04/640/420",
+      "axisWeights": {
+        "timing": 1
+      },
+      "reverse": true
+    },
+    {
+      "id": "q05",
+      "text": "「最近どう？」と聞かれてすぐに話題が出てくる",
+      "imageUrl": "https://picsum.photos/seed/comm-q05/640/420",
+      "axisWeights": {
+        "thinking": 1
+      },
+      "reverse": false
+    },
+    {
+      "id": "q06",
+      "text": "相手の話に対して返事がすぐ思いつかないことがある",
+      "imageUrl": "https://picsum.photos/seed/comm-q06/640/420",
+      "axisWeights": {
+        "thinking": 1
+      },
+      "reverse": true
+    },
+    {
+      "id": "q07",
+      "text": "会話中に「次に何を聞こうか」と考えられる",
+      "imageUrl": "https://picsum.photos/seed/comm-q07/640/420",
+      "axisWeights": {
+        "thinking": 1
+      },
+      "reverse": false
     }
   ]
 }
