@@ -494,6 +494,29 @@ ul {
   border: 0;
 }
 
+.button-x-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 56px;
+  height: 56px;
+  padding: 0;
+
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.button-x-icon:hover {
+  background: #111;
+}
+
+.button-x-icon i {
+  font-size: 28px;
+  line-height: 1;
+}
+
 @media (max-width: 1200px) {
   .result-layout {
     gap: 48px;
